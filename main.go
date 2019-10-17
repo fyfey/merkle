@@ -120,12 +120,11 @@ func main() {
 	}
 	fmt.Printf("Root %s\n\n", rootNode.hash)
 
-	idx := 0
-	fmt.Printf("node %s\n", nodes[0][idx].hash)
+	idx := 4
+	fmt.Printf("verify %s\n\n", nodes[0][idx].hash)
 
 	proveNode := nodes[0][idx]
 	proof := getProof(proveNode)
-	fmt.Printf("Proof: %v\n", proof)
 
 	fmt.Printf("Good? %v\n", proof.Prove(proveNode.hash))
 
@@ -163,6 +162,7 @@ func (p merkleProof) Prove(ha string) bool {
 		} else {
 			ha = hash([]byte(p[i].hash + ha))
 		}
+		fmt.Printf("#%03d: %s\n", i, ha)
 	}
 
 	return ha == rootHash
